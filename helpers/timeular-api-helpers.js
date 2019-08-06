@@ -23,9 +23,7 @@ async function getActivities (token) {
 }
 
 async function startTracking (token, activityId) {
-  const dateString = new Date().toISOString()
-  const dateWithoutLastChar = dateString.slice(0, dateString.length - 1)
-  const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { startedAt: dateWithoutLastChar }, {
+  const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { startedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -43,9 +41,7 @@ async function getCurrentTracking (token) {
 }
 
 async function stopTracking (token, activityId) {
-  const dateString = new Date().toISOString()
-  const dateWithoutLastChar = dateString.slice(0, dateString.length - 1)
-  const { data: { createdTimeEntry } } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/stop`, { stoppedAt: dateWithoutLastChar }, {
+  const { data: { createdTimeEntry } } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/stop`, { stoppedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -53,7 +49,23 @@ async function stopTracking (token, activityId) {
   return createdTimeEntry
 }
 
-module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking }
+async function downloadReport (token, startTimestamp, stopTimestamp, timezone = 'Europe/Berlin', fileType = 'csv') {
+  startTimestamp = _convertToAPICompatibleDate(startTimestamp)
+  stopTimestamp = _convertToAPICompatibleDate(stopTimestamp)
+  const { data } = await axios.get(`${TIMEULAR_API_URL}/report/${startTimestamp}/${stopTimestamp}?timezone=${encodeURIComponent(timezone)}&fileType=${fileType}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  return data
+}
+
+function _convertToAPICompatibleDate (date) {
+  const dateString = date.toISOString()
+  const dateWithoutLastChar = dateString.slice(0, dateString.length - 1)
+  return dateWithoutLastChar
+}
+module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, downloadReport }
 
 // (async () => {
 //   const token = await signIn()
