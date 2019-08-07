@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "npx semantic-release"
   },
   "bin": {
     "timeular": "./index.js"
@@ -20,7 +21,17 @@
     "url": "https://github.com/khaledosman/timeular-cli/issues"
   },
   "homepage": "https://github.com/khaledosman/timeular-cli#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npx standard --fix"
+    }
+  },
   "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "husky": "^3.0.2",
+    "semantic-release": "^15.13.19",
     "standard": "^13.1.0"
   },
   "dependencies": {
