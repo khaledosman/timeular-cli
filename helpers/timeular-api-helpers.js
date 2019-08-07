@@ -55,7 +55,8 @@ async function downloadReport (token, startTimestamp, stopTimestamp, timezone = 
   const { data } = await axios.get(`${TIMEULAR_API_URL}/report/${startTimestamp}/${stopTimestamp}?timezone=${encodeURIComponent(timezone)}&fileType=${fileType}`, {
     headers: {
       Authorization: `Bearer ${token}`
-    }
+    },
+    responseType: 'arraybuffer'
   })
   return data
 }

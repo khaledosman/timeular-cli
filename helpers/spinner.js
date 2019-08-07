@@ -11,6 +11,7 @@ class Spinner {
 
   update (message) {
     this.countdown.message(message)
+    process.stdout.write('\n')
   }
 
   end () {
