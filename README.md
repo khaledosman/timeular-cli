@@ -2,7 +2,18 @@
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
 
 # Installation
+
 `npm i -g timeular-cli`
+
+
+Update your .profile or .bashrc or .zshrc to include the following environment variables:
+
+```
+export TIMEULAR_API_KEY="XXXXXXXXXX"
+export TIMEULAR_API_SECRET="YYYYYYYYYY"
+```
+
+You can get the values for these fields by visiting your [Account page](https://profile.timeular.com/#/app/account) on Timeular
 
 # Usage
 `timeular --help`
