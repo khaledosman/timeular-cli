@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "npx semantic-release"
+    "release": "npx semantic-release",
+    "semantic-release": "semantic-release"
   },
   "bin": {
     "timeular": "./index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khaledosman/timeular-cli.git"
+    "url": "https://github.com/khaledosman/timeular-cli.git"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,11 @@
     "url": "https://github.com/khaledosman/timeular-cli/issues"
   },
   "homepage": "https://github.com/khaledosman/timeular-cli#readme",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
