@@ -49,8 +49,10 @@ async function generateReport (options) {
       writeStream.close()
     }
     spinner.end()
+    console.log(`file downloaded at ${fileName}`)
   } catch (err) {
     spinner.end()
+    console.log((err.response && err.response.data) || err)
   }
 }
 
