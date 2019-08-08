@@ -39,7 +39,7 @@ async function generateReport (options) {
     spinner.update(feedbackColor(`downloading report`))
     const result = await downloadReport(token, new Date(startTime), new Date(new Date(endTime).setHours(23, 59)), 'Europe/Berlin', format)
     spinner.update(feedbackColor(`saving to file system`))
-    const fileName = `${process.cwd()}/${process.env.LOGNAME}_week${getWeek(new Date())}.${format === 'xlsx' ? 'xls' : format}`
+    const fileName = `${process.cwd()}/${process.env.LOGNAME}_week${getWeek(new Date())}.${format === 'xlsx' ? 'xlsx' : format}`
     const writeStream = fs.createWriteStream(fileName)
     if (format === 'xlsx') {
       writeStream.write(result)
