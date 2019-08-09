@@ -52,7 +52,7 @@ async function generateReport (options) {
     console.log(`file downloaded at ${fileName}`)
   } catch (err) {
     spinner.end()
-    console.log((err.response && err.response.data) || err)
+    console.log((errorColor(err.response && err.response.data) || err))
   }
 }
 
