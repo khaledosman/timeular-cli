@@ -1,6 +1,6 @@
 {
   "name": "timeular-cli",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -53,6 +53,15 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/changelog",
+      "@semantic-release/git"
+    ]
   },
   "husky": {
     "hooks": {
