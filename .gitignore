@@ -64,3 +64,6 @@ typings/
 *.csv
 *.xlsx
 *.xls
+
+
+package-lock.json
