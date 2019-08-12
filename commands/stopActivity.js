@@ -1,8 +1,7 @@
-const fuzzy = require('fuzzy')
-const inquirer = require('inquirer')
+
 const { Spinner } = require('../helpers/spinner')
-const { signIn, getActivities, startTracking, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
-const { feedbackColor, interactionColor, errorColor } = require('../helpers/colors')
+const { signIn, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
+const { feedbackColor } = require('../helpers/colors')
 
 async function stopActivity (activityName, options) {
   const spinner = new Spinner(feedbackColor(`logging in to Timeular API`))

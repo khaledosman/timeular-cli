@@ -22,7 +22,7 @@ async function initCli () {
 
   program
     .command('track [activityName]')
-    .description('start tracking for a specific activity')
+    .description('start tracking for a specific activity, stops current tracking before starting a new one')
     // .option('-s, --setup_mode [mode]', 'Which setup mode to use')
     .action(async (activityName, options) => {
       await startActivity(activityName, options)
@@ -39,7 +39,7 @@ async function initCli () {
     })
 
   program
-    .command('stop [activityName]')
+    .command('stop')
     .description('stops tracking current activity')
     .action(async (activityName, options) => {
       await stopActivity(activityName, options)
