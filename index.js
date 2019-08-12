@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const { startActivity } = require('./commands/startActivity')
 const { generateReport } = require('./commands/generateReport')
 const { getCLIVersion } = require('./helpers/get-cli-version')
+const { stopActivity } = require('./commands/stopActivity.js')
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 inquirer.registerPrompt('datepicker', require('inquirer-datepicker'))
@@ -35,6 +36,13 @@ async function initCli () {
     .option('-f, --format <format>', 'xlsx or csv')
     .action(async options => {
       await generateReport(options)
+    })
+
+  program
+    .command('stop [activityName]')
+    .description('stops tracking current activity')
+    .action(async (activityName, options) => {
+      await stopActivity(activityName, options)
     })
 
   console.log(chalk.magenta(figlet.textSync('Timeular', {
