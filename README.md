@@ -5,7 +5,8 @@
 [![Build Status](https://travis-ci.org/khaledosman/timeular-cli.svg?branch=master)](https://travis-ci.org/khaledosman/timeular-cli) [![Greenkeeper badge](https://badges.greenkeeper.io/khaledosman/timeular-cli.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/timeular-cli.svg)](https://badge.fury.io/js/timeular-cli)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
+[![dependencies Status](https://david-dm.org/khaledosman/timeular-cli/status.svg)](https://david-dm.org/khaledosman/timeular-cli)
+[![devDependencies Status](https://david-dm.org/khaledosman/timeular-cli/dev-status.svg)](https://david-dm.org/khaledosman/timeular-cli?type=dev)
 
 # timeular-cli
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
