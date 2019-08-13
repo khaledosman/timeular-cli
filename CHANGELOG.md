@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/khaledosman/timeular-cli/compare/v1.1.0...v1.1.1) (2019-08-13)
+
+
+### Bug Fixes
+
+* remove unnecessary option activityName ([09bb8c0](https://github.com/khaledosman/timeular-cli/commit/09bb8c0))
+
 # [1.1.0](https://github.com/khaledosman/timeular-cli/compare/v1.0.6...v1.1.0) (2019-08-12)
 
 
