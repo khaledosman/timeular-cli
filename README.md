@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![dependencies Status](https://david-dm.org/khaledosman/timeular-cli/status.svg)](https://david-dm.org/khaledosman/timeular-cli)
 [![devDependencies Status](https://david-dm.org/khaledosman/timeular-cli/dev-status.svg)](https://david-dm.org/khaledosman/timeular-cli?type=dev)
-[![npm](https://img.shields.io/npm/dm/timeular-cli.svg)]()
+[![npm](https://img.shields.io/npm/dy/timeular-cli.svg)]()
 
 # timeular-cli
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
