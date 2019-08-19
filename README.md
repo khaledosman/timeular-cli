@@ -9,6 +9,8 @@
 [![devDependencies Status](https://david-dm.org/khaledosman/timeular-cli/dev-status.svg)](https://david-dm.org/khaledosman/timeular-cli?type=dev)
 [![npm](https://img.shields.io/npm/dy/timeular-cli.svg)]()
 
+[![NPM](https://nodei.co/npm/timeular-cli.png?downloads=true)](https://nodei.co/npm/timeular-cli)
+
 # timeular-cli
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
 
