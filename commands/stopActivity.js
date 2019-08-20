@@ -4,8 +4,8 @@ const { signIn, getCurrentTracking, stopTracking } = require('../helpers/timeula
 const { feedbackColor } = require('../helpers/colors')
 
 async function stopActivity (activityName, options) {
-  const spinner = new Spinner(feedbackColor(`logging in to Timeular API`))
-  const spinner2 = new Spinner(feedbackColor(`getting current active tracking`))
+  const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
+  const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
     spinner.start()
     const token = await signIn()
@@ -14,7 +14,7 @@ async function stopActivity (activityName, options) {
     spinner2.start()
     const currentTracking = await getCurrentTracking(token)
     if (!currentTracking) {
-      throw Error(`found no running activities to stop`)
+      throw Error('found no running activities to stop')
     } else {
       spinner.update(feedbackColor('current tracking found. Stopping current tracking'))
       await stopTracking(token, currentTracking.activity.id)

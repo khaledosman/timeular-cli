@@ -30,15 +30,15 @@ const questions = [{
 }]
 
 async function generateReport (options) {
-  const spinner = new Spinner(feedbackColor(`signing in to API`))
+  const spinner = new Spinner(feedbackColor('signing in to API'))
   try {
     const { startTime, endTime, format } = (options.startTime && options.endTime && options.format) ? options : await inquirer.prompt(questions)
 
     spinner.start()
     const token = await signIn()
-    spinner.update(feedbackColor(`downloading report`))
+    spinner.update(feedbackColor('downloading report'))
     const result = await downloadReport(token, new Date(startTime), new Date(new Date(endTime).setHours(23, 59)), 'Europe/Berlin', format)
-    spinner.update(feedbackColor(`saving to file system`))
+    spinner.update(feedbackColor('saving to file system'))
     const fileName = `${process.cwd()}/${process.env.LOGNAME}_week${getWeek(new Date())}.${format === 'xlsx' ? 'xlsx' : format}`
     const writeStream = fs.createWriteStream(fileName)
     if (format === 'xlsx') {

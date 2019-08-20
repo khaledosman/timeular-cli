@@ -5,12 +5,12 @@ const { signIn, getActivities, startTracking, getCurrentTracking, stopTracking }
 const { feedbackColor, interactionColor, errorColor } = require('../helpers/colors')
 
 async function startActivity (activityName, options) {
-  const spinner = new Spinner(feedbackColor(`logging in to Timeular API`))
-  const spinner2 = new Spinner(feedbackColor(`getting current active tracking`))
+  const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
+  const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
     spinner.start()
     const token = await signIn()
-    spinner.update(feedbackColor(`getting available activities`))
+    spinner.update(feedbackColor('getting available activities'))
     const activities = await getActivities(token)
     spinner.end()
     let activity
@@ -23,7 +23,7 @@ async function startActivity (activityName, options) {
     }
 
     if (!activity || !activity.id) {
-      console.error(errorColor(`activity not found`))
+      console.error(errorColor('activity not found'))
       process.exit(1)
     }
     const activityId = activity.id

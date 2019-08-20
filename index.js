@@ -30,7 +30,7 @@ async function initCli () {
 
   program
     .command('report')
-    .description(`generates timeular report in csv or xlsx format`)
+    .description('generates timeular report in csv or xlsx format')
     .option('-s, --startTime <startTime>', 'startTime')
     .option('-e, --endTime <endTIme>', 'endTime')
     .option('-f, --format <format>', 'xlsx or csv')
