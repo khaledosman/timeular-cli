@@ -8,8 +8,7 @@
 [![dependencies Status](https://david-dm.org/khaledosman/timeular-cli/status.svg)](https://david-dm.org/khaledosman/timeular-cli)
 [![devDependencies Status](https://david-dm.org/khaledosman/timeular-cli/dev-status.svg)](https://david-dm.org/khaledosman/timeular-cli?type=dev)
 [![npm](https://img.shields.io/npm/dy/timeular-cli.svg)]()
-
-[![NPM](https://nodei.co/npm/timeular-cli.png?downloads=true)](https://nodei.co/npm/timeular-cli)
+[![codebeat badge](https://codebeat.co/badges/23595c2b-a89d-4607-b694-a7d512e821d2)](https://codebeat.co/projects/github-com-khaledosman-timeular-cli-master)
 
 # timeular-cli
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
