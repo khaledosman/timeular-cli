@@ -4,7 +4,7 @@ const { Spinner } = require('../helpers/spinner')
 const { signIn, getActivities, startTracking, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
 const { feedbackColor, interactionColor, errorColor } = require('../helpers/colors')
 
-async function startActivity (activityName, options) {
+async function startActivity (activityName) {
   const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
   const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
@@ -13,14 +13,7 @@ async function startActivity (activityName, options) {
     spinner.update(feedbackColor('getting available activities'))
     const activities = await getActivities(token)
     spinner.end()
-    let activity
-    if (!activityName) {
-      const answers = await getActivityNameFromInput(activities)
-      activityName = answers.activityName
-      activity = activities.find(a => a.name === answers.activityName)
-    } else {
-      activity = activities.find(a => a.name === activityName)
-    }
+    const activity = await _getActivity(activityName, activities)
 
     if (!activity || !activity.id) {
       console.error(errorColor('activity not found'))
@@ -48,6 +41,17 @@ async function startActivity (activityName, options) {
   }
 }
 
+async function _getActivity (activityName, activities) {
+  let activity
+  if (!activityName) {
+    const answers = await getActivityNameFromInput(activities)
+    activityName = answers.activityName
+    activity = activities.find(a => a.name === answers.activityName)
+  } else {
+    activity = activities.find(a => a.name === activityName)
+  }
+  return activity
+}
 function getActivityNameFromInput (activities) {
   return inquirer
     .prompt({
