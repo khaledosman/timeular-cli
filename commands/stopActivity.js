@@ -3,7 +3,7 @@ const { Spinner } = require('../helpers/spinner')
 const { signIn, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
 const { feedbackColor } = require('../helpers/colors')
 
-async function stopActivity (activityName, options) {
+async function stopActivity () {
   const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
   const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
