@@ -9,7 +9,7 @@ const questions = [{
   name: 'startTime',
   message: 'Select a start time: ',
   format: 'llll',
-  default: new Date(new Date().setHours(new Date().getHours() - (24 * 7))).setHours(7, 0, 0, 0),
+  default: new Date(new Date().setDate(new Date().getDate() - 4)).setHours(7, 0, 0, 0),
   steps: {
     days: 1
   }
@@ -18,7 +18,7 @@ const questions = [{
   name: 'endTime',
   message: 'Select an end time: ',
   format: 'llll',
-  default: new Date(),
+  default: new Date(new Date().setHours(23, 59, 0, 0)),
   steps: {
     days: 1
   }
