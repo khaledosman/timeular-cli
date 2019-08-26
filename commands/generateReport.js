@@ -44,7 +44,7 @@ async function generateReport (options) {
       fileType: format
     })
     spinner.update(feedbackColor('saving to file system'))
-    const fileName = `${process.cwd()}/${process.env.LOGNAME}_week${getWeek(new Date())}.${format === 'xlsx' ? 'xlsx' : format}`
+    const fileName = `${process.cwd()}/${process.env.LOGNAME}_week${getWeek(new Date(startTime))}.${format === 'xlsx' ? 'xlsx' : format}`
     const writeStream = fs.createWriteStream(fileName)
     if (format === 'xlsx') {
       writeStream.write(result)
