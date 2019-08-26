@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/khaledosman/timeular-cli/compare/v1.1.3...v1.1.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* fix week number calculation being based on currentdate ([10d7bd0](https://github.com/khaledosman/timeular-cli/commit/10d7bd0))
+
 ## [1.1.3](https://github.com/khaledosman/timeular-cli/compare/v1.1.2...v1.1.3) (2019-08-23)
 
 
