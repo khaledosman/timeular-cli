@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/khaledosman/timeular-cli/compare/v1.1.4...v1.1.5) (2019-10-29)
+
+
+### Bug Fixes
+
+* bump dependencies ([345b9e5](https://github.com/khaledosman/timeular-cli/commit/345b9e54fdbbaf88ef942ba6687fd5981d2d4c94))
+
 ## [1.1.4](https://github.com/khaledosman/timeular-cli/compare/v1.1.3...v1.1.4) (2019-08-26)
 
 
