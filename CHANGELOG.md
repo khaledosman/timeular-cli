@@ -1,3 +1,11 @@
+## [1.1.6](https://github.com/khaledosman/timeular-cli/compare/v1.1.5...v1.1.6) (2020-01-02)
+
+
+### Bug Fixes
+
+* bump dependencies ([3e95e8e](https://github.com/khaledosman/timeular-cli/commit/3e95e8e9cb6ddb5fc19db4aba774a272ca12a09c))
+* **package:** update commander to version 4.0.0 ([343f0bb](https://github.com/khaledosman/timeular-cli/commit/343f0bb181f086dbd346a513d4b4bd1b91241836))
+
 ## [1.1.5](https://github.com/khaledosman/timeular-cli/compare/v1.1.4...v1.1.5) (2019-10-29)
 
 
