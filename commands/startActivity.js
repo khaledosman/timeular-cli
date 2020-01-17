@@ -33,7 +33,7 @@ async function startActivity (activityName) {
       await startTracking(token, activityId)
     }
     spinner2.end()
-    console.log(feedbackColor(`started tracking ${activityName} ${activityId}`))
+    console.log(feedbackColor(`started tracking activity ${activity.name} with id ${activityId}`))
   } catch (err) {
     spinner.end()
     spinner2.end()
