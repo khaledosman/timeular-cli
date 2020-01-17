@@ -46,6 +46,7 @@ Options:
 Commands:
   track [activityName]  start tracking for a specific activity
   report [options]      generates timeular report in csv or xlsx format
+  stop                  stops tracking current activity
 ```
 
 `timeular track --help`
@@ -74,6 +75,9 @@ Options:
 You can use the interactive CLI to choose which activity you want to track, or if you already know the activity name you can enter it right away.
 - `timeular track <activityName>`  or
 - `timeular track`
+
+## Stop current Activity
+`timeular stop`
 
 ## Generate A Report
 You can use the interactive CLI to choose the start/end times and the exported file's format, or you can enter them straight away as flags to the command.
