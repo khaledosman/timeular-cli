@@ -1,3 +1,11 @@
+## [1.1.7](https://github.com/khaledosman/timeular-cli/compare/v1.1.6...v1.1.7) (2020-01-17)
+
+
+### Bug Fixes
+
+* fix activity name undefined in log message ([905c1a1](https://github.com/khaledosman/timeular-cli/commit/905c1a10c043da05e1474126b4a0c247732a1ebe))
+* **package:** update chalk to version 3.0.0 ([d0fe488](https://github.com/khaledosman/timeular-cli/commit/d0fe48839dcd01b8aa3d135e49c2bd0e62d1055c))
+
 ## [1.1.6](https://github.com/khaledosman/timeular-cli/compare/v1.1.5...v1.1.6) (2020-01-02)
 
 
