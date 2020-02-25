@@ -2,3 +2,5 @@
 *.csv
 *.xlsx
 *.xls
+*.yml
+*.config.js
