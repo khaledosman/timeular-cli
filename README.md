@@ -12,6 +12,7 @@
 
 # timeular-cli
 CLI wrapper for Timeular's API to track activities and generate csv & xlsx reports!
+Can be used as an interactive cli by asking the user questions or directly by setting the required input via their corresponding flags
 
 # Installation
 
@@ -30,7 +31,7 @@ You can get the values for these fields by visiting your [Account page](https://
 # Usage
 `timeular --help`
 ```
-MacBook-Pro-3:github khaledosman$ timeular --help
+➜  github timeular --help
   _____   _                              _
  |_   _| (_)  _ __ ___     ___   _   _  | |   __ _   _ __
    | |   | | | '_ ` _ \   / _ \ | | | | | |  / _` | | '__|
@@ -44,8 +45,9 @@ Options:
   -h, --help            output usage information
 
 Commands:
-  track [activityName]  start tracking for a specific activity
+  track [activityName]  start tracking for a specific activity, stops current tracking before starting a new one
   report [options]      generates timeular report in csv or xlsx format
+  stop                  stops tracking current activity
 ```
 
 `timeular track --help`
