@@ -32,7 +32,7 @@ async function initCli () {
     .command('report')
     .description('generates timeular report in csv or xlsx format')
     .option('-s, --startTime <startTime>', 'startTime')
-    .option('-e, --endTime <endTIme>', 'endTime')
+    .option('-e, --endTime <endTime>', 'endTime')
     .option('-f, --format <format>', 'xlsx or csv')
     .action(async options => {
       await generateReport(options)
