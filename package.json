@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "clui": "^0.3.6",
     "commander": "^4.1.1",
     "dotenv": "^8.2.0",
