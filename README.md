@@ -9,7 +9,6 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![dependencies Status](https://david-dm.org/andreassiegel/timeular-cli/status.svg)](https://david-dm.org/andreassiegel/timeular-cli)
 [![devDependencies Status](https://david-dm.org/andreassiegel/timeular-cli/dev-status.svg)](https://david-dm.org/andreassiegel/timeular-cli?type=dev)
-[![npm](https://img.shields.io/npm/dy/timeular-cli.svg)]()
 [![Maintainability](https://api.codeclimate.com/v1/badges/d5b0f6f7ba3b53e7baa2/maintainability)](https://codeclimate.com/github/andreassiegel/timeular-cli/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d5b0f6f7ba3b53e7baa2/test_coverage)](https://codeclimate.com/github/andreassiegel/timeular-cli/test_coverage)
 
