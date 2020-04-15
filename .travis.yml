@@ -16,7 +16,7 @@ script:
 - nyc --reporter=lcov npm run coverage
 
 after_script:
-- ./cc-test-reporter after-build -t lcov --debug --exit-code $TRAVIS_TEST_RESULT
+- ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
   email: false
