@@ -1,0 +1,13 @@
+plugins:
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  markdownlint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+checks:
+  similar-code:
+    config:
+      threshold: 75
