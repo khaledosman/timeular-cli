@@ -38,7 +38,7 @@
     "@semantic-release/release-notes-generator": "^9.0.1",
     "cz-conventional-changelog": "^3.1.0",
     "husky": "^4.2.3",
-    "semantic-release": "^17.0.4",
+    "semantic-release": "^17.0.5",
     "standard": "^14.3.1"
   },
   "dependencies": {
