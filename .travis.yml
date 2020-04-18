@@ -1,21 +1,17 @@
 language: node_js
 node_js:
-- stable
-
-env:
-  global:
-    secure: cusnLRFa4q+yjpBLx0SGwKouMMZtZibByV+9FetH0CKaM2dkcznhMpp72aiNGrSRc5VVWy8lKy1QMwC7sYao7BgkaaD9e9ZV/Ku52KMrGp/BoZUmyqLBsMxy4G+/n+x9ItQb0jzLTK1lbdCXR6ia7nFrD9jtUlbmBD8bcWcdSoUqPP1aO2QO9g1fXoZzXgdwiHvo1IYUadF2Z8lPWkbQ26dKLmyg79D3/2xpggbCB//PD04tfbcwY304EUGz6IwsW02allEH49kZGdpB94ZSp/kptTzCRldUi+DszavceY9a8DWaWx8ANCiCgxAIJbsw0STZFFhVwJ9UxH0h4TGWfA6AcHGxUE2jdDI2XM0c45vm7qNB0PlscDgxjWqS1JGBSQf0/kfhjGb3d+u/fBBpAkchHykjPnpbBpxKTckr7OTppqY5a4KxVBps5IxQ4D/py7Uig9TiWdAOmnTgB5W/UjLD1tiFtKXpzXtNUtG/MMgBRK7LWgfAXxLB3O/ysQBvMruHJgiDSby/etH11nmgCcu9AXcpBLJ0NElTvoRgJ9tNtvZAmaTTHwOoY3P/Rw7KOBHsl8JPhs/HSI8k6Qw7r/Jo9/kaVr/SsMeXFtoFKS0Wcfu1avSDsQBzwD0RsY3OQHYhJPBM+JDO+RWwEw8qLEsOaCqdghMkBMSi6d7pxQQ=
+  - stable
 
 before_script:
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
-- ./cc-test-reporter before-build
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
-- npm run coverage:ci
+  - npm run coverage:ci
 
 after_script:
-- ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
   email: false

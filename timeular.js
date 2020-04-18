@@ -1,9 +1,8 @@
 #!/usr/bin/env node
+
 require('dotenv').config()
 const program = require('commander')
-const figlet = require('figlet')
 const inquirer = require('inquirer')
-const chalk = require('chalk')
 const { startActivity } = require('./commands/startActivity')
 const { generateReport } = require('./commands/generateReport')
 const { getCLIVersion } = require('./helpers/get-cli-version')
@@ -44,12 +43,6 @@ async function initCli () {
     .action(async (activityName, options) => {
       await stopActivity(activityName, options)
     })
-
-  console.log(chalk.magenta(figlet.textSync('Timeular', {
-    // font: 'Dancing Font',
-    horizontalLayout: 'full',
-    verticalLayout: 'full'
-  })))
 
   program.parse(process.argv)
 

@@ -1,15 +1,12 @@
 const fs = require('fs')
 
-async function checkFileExists (file) {
+const checkFileExists = async file => {
   // Check if the file exists in the current directory.
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     fs.stat(file, (err) => {
-      if (err) {
-        resolve(false)
-      } else {
-        resolve(true)
-      }
+      resolve(!err)
     })
   })
 }
+
 module.exports.checkFileExists = checkFileExists

@@ -8,7 +8,7 @@ const createAPIHeaders = token => ({
   Authorization: `Bearer ${token}`
 })
 
-async function signIn () {
+const signIn = async () => {
   const { data: { token } } = await axios.post(`${TIMEULAR_API_URL}/developer/sign-in`, {
     apiKey: TIMEULAR_API_KEY,
     apiSecret: TIMEULAR_API_SECRET
@@ -17,28 +17,28 @@ async function signIn () {
   return token
 }
 
-async function getActivities (token) {
+const getActivities = async token => {
   const { data: { activities } } = await axios.get(`${TIMEULAR_API_URL}/activities`, {
     headers: createAPIHeaders(token)
   })
   return activities
 }
 
-async function startTracking (token, activityId) {
+const startTracking = async (token, activityId) => {
   const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { startedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: createAPIHeaders(token)
   })
   return data
 }
 
-async function getCurrentTracking (token) {
+const getCurrentTracking = async token => {
   const { data: { currentTracking } } = await axios.get(`${TIMEULAR_API_URL}/tracking`, {
     headers: createAPIHeaders(token)
   })
   return currentTracking
 }
 
-async function stopTracking (token, activityId) {
+const stopTracking = async (token, activityId) => {
   const { data: { createdTimeEntry } } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/stop`, { stoppedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: createAPIHeaders(token)
   })
@@ -55,11 +55,11 @@ async function downloadReport (token, { startTimestamp, stopTimestamp, timezone 
   return data
 }
 
-function _convertToAPICompatibleDate (date) {
+const _convertToAPICompatibleDate = date => {
   const dateString = date.toISOString()
-  const dateWithoutLastChar = dateString.slice(0, dateString.length - 1)
-  return dateWithoutLastChar
+  return dateString.slice(0, dateString.length - 1)
 }
+
 module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, downloadReport }
 
 // (async () => {

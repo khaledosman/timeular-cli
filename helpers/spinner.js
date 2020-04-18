@@ -15,7 +15,7 @@ class Spinner {
 
   end () {
     this.countdown.stop()
-    process.stdout.write('\n')
   }
 }
+
 module.exports.Spinner = Spinner

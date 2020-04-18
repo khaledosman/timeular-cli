@@ -4,7 +4,7 @@ const { Spinner } = require('../helpers/spinner')
 const { signIn, getActivities, startTracking, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
 const { feedbackColor, interactionColor, errorColor } = require('../helpers/colors')
 
-async function startActivity (activityName) {
+const startActivity = async activityName => {
   const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
   const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
@@ -18,6 +18,9 @@ async function startActivity (activityName) {
     if (!activity || !activity.id) {
       console.error(errorColor('activity not found'))
       process.exit(1)
+      // Return because of no-op process.exit() in tests -- TODO: Use exception or return instead
+      // eslint-disable-next-line no-unreachable
+      return
     }
     const activityId = activity.id
 
@@ -41,7 +44,7 @@ async function startActivity (activityName) {
   }
 }
 
-async function _getActivity (activityName, activities) {
+const _getActivity = async (activityName, activities) => {
   let activity
   if (!activityName) {
     const answers = await getActivityNameFromInput(activities)
@@ -52,21 +55,20 @@ async function _getActivity (activityName, activities) {
   }
   return activity
 }
-function getActivityNameFromInput (activities) {
-  return inquirer
-    .prompt({
-      type: 'autocomplete',
-      name: 'activityName',
-      message: interactionColor('Please select an activity'),
-      source: (answersSoFar, input) => {
-        const labels = activities.map(a => a.name)
-        if (!input) {
-          return Promise.resolve(labels)
-        } else {
-          const results = fuzzy.filter(input, labels)
-          return Promise.resolve(results.map(({ string, score, index, original }) => labels[index]))
-        }
-      }
-    })
-}
+
+const getActivityNameFromInput = activities => inquirer.prompt({
+  type: 'autocomplete',
+  name: 'activityName',
+  message: interactionColor('Please select an activity'),
+  source: (answersSoFar, input) => {
+    const labels = activities.map(a => a.name)
+    if (!input) {
+      return Promise.resolve(labels)
+    } else {
+      const results = fuzzy.filter(input, labels)
+      return Promise.resolve(results.map(({ string, score, index, original }) => labels[index]))
+    }
+  }
+})
+
 module.exports = { startActivity }
