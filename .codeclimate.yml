@@ -11,3 +11,5 @@ checks:
   similar-code:
     config:
       threshold: 75
+exclude_patterns:
+  - "**/__tests__/" # Tests
