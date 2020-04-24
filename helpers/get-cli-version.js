@@ -1,5 +1,4 @@
-
-async function getCLIVersion () {
+const getCLIVersion = () => {
   const packageJson = require('../package.json')
   return packageJson.version
 }
