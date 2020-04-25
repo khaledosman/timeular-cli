@@ -65,3 +65,60 @@ Options:
   -h, --help     output usage information                                                  [boolean]
   -v, --version  output the version number
 ```
+
+### Tracking Activity
+
+Activities can be tracked in multiple ways:
+
+#### Interactive Tracking
+
+If you do not provide any options to the `track` command, you will be prompted to select the activity to track:
+
+```shell script
+$ timeular track
+? Please select an activity (Use arrow keys or type to search)
+❯ DEV
+  ARC
+  Administration
+  Education
+```
+
+The list includes all activities you configured in Timeular.
+
+#### Tracking of a specified Activity
+
+You can directly specify the activity in order to start tracking immediately:
+
+```shell script
+$ timeular track <activity>
+```
+
+#### Tracking of a specified Activity with a Note
+
+In addition, you can also add a note when you can directly specify the activity and start tracking immediately:
+
+```shell script
+$ timeular track <activity> -m <note>
+```
+
+The note may contain tags (`#tag`) and mentions (`@mention`).
+
+### Check the Tracking Status
+
+Use the `status` command to check your current tracking status:
+
+```shell script
+$ timeular status
+Currently tracking: DEV - Working on Timeular CLI (1h 16m 2s)
+```
+
+The output includes the note of the current tracking, if available.
+The current duration is displayed as well.
+
+### Stop Tracking
+
+To finish an activity, use the `stop` command:
+
+```shell script
+$ timeular stop
+```
