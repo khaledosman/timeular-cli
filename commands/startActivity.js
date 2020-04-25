@@ -71,4 +71,4 @@ const getActivityNameFromInput = activities => inquirer.prompt({
   }
 })
 
-module.exports = { startActivity }
+module.exports = startActivity

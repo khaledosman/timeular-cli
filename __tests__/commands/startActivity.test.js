@@ -1,4 +1,4 @@
-const { startActivity } = require('../../commands/startActivity')
+const { startActivity } = require('../../commands')
 const apiHelpers = require('../../helpers/timeular-api-helpers')
 const colors = require('../../helpers/colors')
 

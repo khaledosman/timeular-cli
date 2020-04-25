@@ -66,4 +66,4 @@ const getWeek = (date) => {
   return Math.ceil((((date - oneJan) / 86400000) + oneJan.getDay() + 1) / 7)
 }
 
-module.exports = { generateReport }
+module.exports = generateReport

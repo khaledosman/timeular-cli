@@ -4,10 +4,8 @@ require('dotenv').config()
 
 const yargs = require('yargs')
 const inquirer = require('inquirer')
-const { startActivity } = require('./commands/startActivity')
-const { generateReport } = require('./commands/generateReport')
+const { startActivity, stopActivity, generateReport, status } = require('./commands')
 const { getCLIVersion } = require('./helpers/get-cli-version')
-const { stopActivity } = require('./commands/stopActivity.js')
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 inquirer.registerPrompt('datepicker', require('inquirer-datepicker'))
@@ -43,6 +41,12 @@ const initCli = async () => {
       aliases: [],
       desc: 'Stops tracking current activity',
       handler: async argv => { await stopActivity() }
+    })
+    .command({
+      command: 'status',
+      aliases: [],
+      desc: 'Shows the current activity tracking status',
+      handler: async argv => { await status() }
     })
     .command({
       command: 'report',
