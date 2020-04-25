@@ -46,7 +46,7 @@ describe('Application Tests', () => {
 
     it('returns usage info to stdout', async () => {
       const { stdout: result } = await cli(['help'], '.')
-      expect(result).toContain('Usage: timeular <command> [arguments]')
+      expect(result).toContain('Usage: timeular <command> [options]')
     })
 
     it('returns command info to stdout', async () => {

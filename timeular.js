@@ -14,7 +14,7 @@ const initCli = async () => {
   // eslint-disable-next-line no-unused-expressions
   yargs
     .scriptName('timeular')
-    .usage('Usage: $0 <command> [arguments]')
+    .usage('Usage: $0 <command> [options]')
     .command({
       command: 'track [activityName]',
       aliases: [],
