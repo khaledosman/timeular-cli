@@ -45,16 +45,6 @@ const stopTracking = async (token, activityId) => {
   return createdTimeEntry
 }
 
-async function downloadReport (token, { startTimestamp, stopTimestamp, timezone = 'Europe/Berlin', fileType = 'csv' }) {
-  startTimestamp = _convertToAPICompatibleDate(startTimestamp)
-  stopTimestamp = _convertToAPICompatibleDate(stopTimestamp)
-  const { data } = await axios.get(`${TIMEULAR_API_URL}/report/${startTimestamp}/${stopTimestamp}?timezone=${encodeURIComponent(timezone)}&fileType=${fileType}`, {
-    headers: createAPIHeaders(token),
-    responseType: 'arraybuffer'
-  })
-  return data
-}
-
 const _convertToAPICompatibleDate = date => {
   const dateString = date.toISOString()
   return dateString.slice(0, dateString.length - 1)
@@ -90,4 +80,4 @@ const _extractFirstKey = note => {
 
 const _containsLabel = text => text.search(/\s[@#][\w\d]|^[@#][\w\d]/) > -1
 
-module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, downloadReport, parseNote }
+module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, parseNote }
