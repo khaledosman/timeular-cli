@@ -24,8 +24,8 @@ const getActivities = async token => {
   return activities
 }
 
-const startTracking = async (token, activityId) => {
-  const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { startedAt: _convertToAPICompatibleDate(new Date()) }, {
+const startTracking = async (token, activityId, message) => {
+  const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { note: parseNote(message), startedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: createAPIHeaders(token)
   })
   return data
@@ -60,10 +60,34 @@ const _convertToAPICompatibleDate = date => {
   return dateString.slice(0, dateString.length - 1)
 }
 
-module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, downloadReport }
+const parseNote = note => note ? _extractLabels(note) : undefined
 
-// (async () => {
-//   const token = await signIn()
-//   const activities = await getActivities(token)
-//   console.log(activities)
-// })()
+const _extractLabels = (text, tags = [], mentions = []) => {
+  if (_containsLabel(text)) {
+    const { label, indices, key } = _extractFirstKey(text)
+    switch (label.substring(0, 1)) {
+      case '#':
+        tags.push({ key, indices })
+        break
+      case '@':
+        mentions.push({ key, indices })
+        break
+    }
+    text = text.replace(label, key)
+
+    return _extractLabels(text, tags, mentions)
+  }
+  return { text, tags, mentions }
+}
+
+const _extractFirstKey = note => {
+  const label = note.split(/\s+/).find(w => w.startsWith('@') || w.startsWith('#')) || ''
+  const index = note.indexOf(label)
+  const key = label.substring(1, label.length)
+
+  return { label, indices: [index, index + label.length - 1], key }
+}
+
+const _containsLabel = text => text.search(/\s[@#][\w\d]|^[@#][\w\d]/) > -1
+
+module.exports = { signIn, getActivities, startTracking, getCurrentTracking, stopTracking, downloadReport, parseNote }

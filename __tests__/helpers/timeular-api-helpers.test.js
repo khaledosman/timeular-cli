@@ -112,6 +112,7 @@ describe('Timeular API Helpers', () => {
   describe('startTracking()', () => {
     const token = '12345'
     const activityId = '123'
+    const note = '#development Working with @John on the new project'
     const response = {
       status: 200,
       statusText: 'OK',
@@ -147,6 +148,39 @@ describe('Timeular API Helpers', () => {
       const expectedBody = { startedAt: '2019-05-14T11:01:58.135' }
 
       await apiHelpers.startTracking(token, activityId)
+
+      expect(axios.post).toHaveBeenCalledWith(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, expectedBody, { headers: expectedHeaders })
+    })
+
+    it('sends request with note', async () => {
+      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      const expectedHeaders = { Authorization: `Bearer ${token}` }
+      const expectedBody = {
+        startedAt: '2019-05-14T11:01:58.135',
+        note: {
+          text: 'development Working with John on the new project',
+          tags: [
+            {
+              indices: [
+                0,
+                11
+              ],
+              key: 'development'
+            }
+          ],
+          mentions: [
+            {
+              indices: [
+                25,
+                29
+              ],
+              key: 'John'
+            }
+          ]
+        }
+      }
+
+      await apiHelpers.startTracking(token, activityId, note)
 
       expect(axios.post).toHaveBeenCalledWith(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, expectedBody, { headers: expectedHeaders })
     })
@@ -339,6 +373,188 @@ describe('Timeular API Helpers', () => {
       axios.post.mockImplementationOnce(() => Promise.resolve(response))
 
       await expect(apiHelpers.stopTracking(undefined, activityId)).resolves.toBeUndefined()
+    })
+  })
+
+  describe('parseNote()', () => {
+    it('returns undefined for undefined input', () => {
+      const msg = undefined
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toBeUndefined()
+    })
+
+    it('returns undefined for null input', () => {
+      const msg = null
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toBeUndefined()
+    })
+
+    it('returns undefined for empty input', () => {
+      const msg = ''
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toBeUndefined()
+    })
+
+    it('returns note as text without tags or mentions', () => {
+      const msg = 'this is my note'
+      const expectedNote = {
+        text: msg,
+        tags: [],
+        mentions: []
+      }
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts tag to object', () => {
+      const msg = '#tag'
+      const expectedNote = {
+        text: 'tag',
+        tags: [
+          { indices: [0, 3], key: 'tag' }
+        ],
+        mentions: []
+      }
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts multiple tags to objects', () => {
+      const msg = '#tag something else #foo #bar'
+      const expectedNote = {
+        text: 'tag something else foo bar',
+        tags: [
+          { indices: [0, 3], key: 'tag' },
+          { indices: [19, 22], key: 'foo' },
+          { indices: [23, 26], key: 'bar' }
+        ],
+        mentions: []
+      }
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('ignores # within words', () => {
+      const text = 'no#tag'
+      const expectedNote = {
+        text,
+        tags: [],
+        mentions: []
+      }
+
+      const result = apiHelpers.parseNote(text)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts mention to object', () => {
+      const msg = '@mention'
+      const expectedNote = {
+        text: 'mention',
+        tags: [],
+        mentions: [
+          { indices: [0, 7], key: 'mention' }
+        ]
+      }
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts multiple mentions to objects', () => {
+      const msg = '@mention something else @foo @bar'
+      const expectedNote = {
+        text: 'mention something else foo bar',
+        tags: [],
+        mentions: [
+          { indices: [0, 7], key: 'mention' },
+          { indices: [23, 26], key: 'foo' },
+          { indices: [27, 30], key: 'bar' }
+        ]
+      }
+
+      const result = apiHelpers.parseNote(msg)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('ignores @ within words', () => {
+      const text = 'no@mention'
+      const expectedNote = {
+        text,
+        tags: [],
+        mentions: []
+      }
+
+      const result = apiHelpers.parseNote(text)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts example from API spec', () => {
+      const text = '#development Working with @John on the new project'
+      const expectedNote = {
+        text: 'development Working with John on the new project',
+        tags: [
+          {
+            indices: [
+              0,
+              11
+            ],
+            key: 'development'
+          }
+        ],
+        mentions: [
+          {
+            indices: [
+              25,
+              29
+            ],
+            key: 'John'
+          }
+        ]
+      }
+
+      const result = apiHelpers.parseNote(text)
+      expect(result).toEqual(expectedNote)
+    })
+
+    it('converts multiple occurrences', () => {
+      const text = 'Test with #tag and @mention #anothertag'
+      const expectedNote = {
+        text: 'Test with tag and mention anothertag',
+        tags: [
+          {
+            indices: [
+              10,
+              13
+            ],
+            key: 'tag'
+          },
+          {
+            indices: [
+              26,
+              36
+            ],
+            key: 'anothertag'
+          }
+        ],
+        mentions: [
+          {
+            indices: [
+              18,
+              25
+            ],
+            key: 'mention'
+          }
+        ]
+      }
+
+      const result = apiHelpers.parseNote(text)
+      expect(result).toEqual(expectedNote)
     })
   })
 })

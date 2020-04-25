@@ -4,7 +4,7 @@ const { Spinner } = require('../helpers/spinner')
 const { signIn, getActivities, startTracking, getCurrentTracking, stopTracking } = require('../helpers/timeular-api-helpers')
 const { feedbackColor, interactionColor, errorColor } = require('../helpers/colors')
 
-const startActivity = async activityName => {
+const startActivity = async (activityName, message) => {
   const spinner = new Spinner(feedbackColor('logging in to Timeular API'))
   const spinner2 = new Spinner(feedbackColor('getting current active tracking'))
   try {
@@ -28,12 +28,12 @@ const startActivity = async activityName => {
     const currentTracking = await getCurrentTracking(token)
     if (!currentTracking) {
       spinner.update(feedbackColor('starting tracking'))
-      await startTracking(token, activityId)
+      await startTracking(token, activityId, message)
     } else {
       spinner.update(feedbackColor('current tracking found. Stopping current tracking'))
       await stopTracking(token, currentTracking.activity.id)
       spinner.update(feedbackColor('starting new tracking'))
-      await startTracking(token, activityId)
+      await startTracking(token, activityId, message)
     }
     spinner2.end()
     console.log(feedbackColor(`started tracking activity ${activity.name} with id ${activityId}`))

@@ -21,8 +21,22 @@ const initCli = async () => {
       command: 'track [activityName]',
       aliases: [],
       desc: 'Start tracking for a specific activity, stops current tracking before starting a new one',
-      builder: yargs => yargs.positional('activityName', { type: 'string', default: '', describe: 'the name of the activity to track' }),
-      handler: async argv => { await startActivity(argv.activityName) }
+      builder: yargs => {
+        yargs
+          .positional('activityName', {
+            type: 'string',
+            default: '',
+            describe: 'the name of the activity to track'
+          })
+          .option('m', {
+            alias: 'message',
+            describe: 'the message to add to the activity',
+            type: 'string',
+            nargs: 1,
+            demand: false
+          })
+      },
+      handler: async argv => { await startActivity(argv.activityName, argv.message) }
     })
     .command({
       command: 'stop',

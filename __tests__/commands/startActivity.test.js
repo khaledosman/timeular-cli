@@ -115,7 +115,7 @@ describe('startActivity()', () => {
     expect(apiHelpers.stopTracking).toHaveBeenCalledTimes(1)
     expect(apiHelpers.stopTracking).toHaveBeenCalledWith(token, currentTracking.activity.id)
     expect(apiHelpers.startTracking).toHaveBeenCalledTimes(1)
-    expect(apiHelpers.startTracking).toHaveBeenCalledWith(token, activity.id)
+    expect(apiHelpers.startTracking).toHaveBeenCalledWith(token, activity.id, undefined)
   })
 
   it('starts new tracking without stopping if no tracking before', async () => {
@@ -126,7 +126,7 @@ describe('startActivity()', () => {
 
     expect(apiHelpers.stopTracking).toHaveBeenCalledTimes(0)
     expect(apiHelpers.startTracking).toHaveBeenCalledTimes(1)
-    expect(apiHelpers.startTracking).toHaveBeenCalledWith(token, activity.id)
+    expect(apiHelpers.startTracking).toHaveBeenCalledWith(token, activity.id, undefined)
   })
 
   it('writes an error and does not start tracking if stopping fails', async () => {
