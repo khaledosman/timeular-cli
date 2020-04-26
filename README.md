@@ -60,6 +60,7 @@ Commands:
                                  before starting a new one
   timeular stop                  Stops tracking current activity
   timeular status                Shows the current activity tracking status
+  timeular list                  Lists all activities that are available for tracking
 
 Options:
   -h, --help     output usage information                                                  [boolean]
