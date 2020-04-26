@@ -3,7 +3,7 @@ const { getCurrentTracking, stopTracking } = require('../helpers/timeular-api-he
 const { feedbackColor } = require('../helpers/colors')
 const parse = require('../helpers/trackingParser')
 
-const stopActivity = async argv => {
+const stop = async argv => {
   const { apiToken } = argv
   const spinner = new Spinner(feedbackColor('getting current active tracking'))
   try {
@@ -18,8 +18,8 @@ const stopActivity = async argv => {
     console.log('Stopped tracking: ' + parse(timeEntry))
   } catch (err) {
     spinner.end()
-    console.log((err.response && err.response.data && err.response.data.message) || err)
+    throw err
   }
 }
 
-module.exports = stopActivity
+module.exports = stop

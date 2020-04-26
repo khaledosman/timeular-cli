@@ -5,7 +5,7 @@ const { Spinner } = require('../helpers/spinner')
 const { getActivities, getCurrentTracking } = require('../helpers/timeular-api-helpers')
 const { feedbackColor } = require('../helpers/colors')
 
-const listActivities = async argv => {
+const list = async argv => {
   const { apiToken } = argv
   const spinner = new Spinner(feedbackColor('getting available activities'))
   try {
@@ -32,4 +32,4 @@ const _getCurrentActivity = async token => {
   return tracking.activity.name || ''
 }
 
-module.exports = listActivities
+module.exports = list

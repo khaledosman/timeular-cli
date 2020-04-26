@@ -25,17 +25,17 @@ const getActivities = async token => {
 }
 
 const startTracking = async (token, activityId, message) => {
-  const { data } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { note: parseNote(message), startedAt: _convertToAPICompatibleDate(new Date()) }, {
-    headers: createAPIHeaders(token)
-  })
-  return data
-}
-
-const getCurrentTracking = async token => {
-  const { data: { currentTracking } } = await axios.get(`${TIMEULAR_API_URL}/tracking`, {
+  const { data: { currentTracking } } = await axios.post(`${TIMEULAR_API_URL}/tracking/${activityId}/start`, { note: parseNote(message), startedAt: _convertToAPICompatibleDate(new Date()) }, {
     headers: createAPIHeaders(token)
   })
   return currentTracking
+}
+
+const getCurrentTracking = async token => {
+  const { data = {} } = await axios.get(`${TIMEULAR_API_URL}/tracking`, {
+    headers: createAPIHeaders(token)
+  })
+  return data.currentTracking || null
 }
 
 const stopTracking = async (token, activityId) => {

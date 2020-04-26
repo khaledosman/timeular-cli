@@ -99,15 +99,16 @@ describe('Timeular API Helpers', () => {
       await expect(apiHelpers.getActivities(token)).resolves.toEqual(response.data.activities)
     })
 
-    it('returns undefined for 401 Unauthorized', async () => {
+    it('rejects for 401 Unauthorized', async () => {
       const response = {
         status: 401,
         statusText: 'Unauthorized',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.get.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.get.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.getActivities(undefined)).resolves.toBeUndefined()
+      await expect(apiHelpers.getActivities(token)).rejects.toHaveProperty('response', response)
     })
   })
 
@@ -190,29 +191,31 @@ describe('Timeular API Helpers', () => {
     it('returns current tracking data', async () => {
       axios.post.mockImplementationOnce(() => Promise.resolve(response))
 
-      await expect(apiHelpers.startTracking(token, activityId)).resolves.toEqual(response.data)
+      await expect(apiHelpers.startTracking(token, activityId)).resolves.toEqual(response.data.currentTracking)
     })
 
-    it('returns error message for 400 Bad Request', async () => {
+    it('rejects for 400 Bad Request', async () => {
       const response = {
         status: 400,
         statusText: 'Bad Request',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.startTracking(token, activityId)).resolves.toEqual(response.data)
+      await expect(apiHelpers.startTracking(token, activityId)).rejects.toHaveProperty('response', response)
     })
 
-    it('returns error message for 401 Unauthorized', async () => {
+    it('rejects for 401 Unauthorized', async () => {
       const response = {
         status: 401,
         statusText: 'Unauthorized',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.startTracking(undefined, activityId)).resolves.toEqual(response.data)
+      await expect(apiHelpers.startTracking(token, activityId)).rejects.toHaveProperty('response', response)
     })
   })
 
@@ -283,15 +286,16 @@ describe('Timeular API Helpers', () => {
       await expect(apiHelpers.getCurrentTracking(token)).resolves.toBeNull()
     })
 
-    it('returns undefined for 401 Unauthorized', async () => {
+    it('rejects for 401 Unauthorized', async () => {
       const response = {
         status: 401,
         statusText: 'Unauthorized',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.get.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.get.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.getCurrentTracking(undefined)).resolves.toBeUndefined()
+      await expect(apiHelpers.getCurrentTracking(token)).rejects.toHaveProperty('response', response)
     })
   })
 
@@ -355,26 +359,28 @@ describe('Timeular API Helpers', () => {
       await expect(apiHelpers.stopTracking(token, activityId)).resolves.toEqual(response.data.createdTimeEntry)
     })
 
-    it('returns undefined for 400 Bad Request', async () => {
+    it('rejects for 400 Bad Request', async () => {
       const response = {
         status: 400,
         statusText: 'Bad Request',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.stopTracking(token, activityId)).resolves.toBeUndefined()
+      await expect(apiHelpers.stopTracking(token, activityId)).rejects.toHaveProperty('response', response)
     })
 
-    it('returns undefined for 401 Unauthorized', async () => {
+    it('rejects for 401 Unauthorized', async () => {
       const response = {
         status: 401,
         statusText: 'Unauthorized',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.stopTracking(undefined, activityId)).resolves.toBeUndefined()
+      await expect(apiHelpers.stopTracking(token, activityId)).rejects.toHaveProperty('response', response)
     })
   })
 

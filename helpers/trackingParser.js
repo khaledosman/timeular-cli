@@ -6,7 +6,9 @@ const parse = tracking => {
 
   let output = activity.name
   output += note && note.text ? ' - ' + note.text : ''
-  output += ' (' + duration.join(' ') + ')'
+  if (duration.length > 0) {
+    output += ' (' + duration.join(' ') + ')'
+  }
 
   return output
 }

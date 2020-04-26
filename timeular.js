@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const yargs = require('yargs')
 const inquirer = require('inquirer')
-const { startActivity, stopActivity, status, listActivities } = require('./commands')
+const { start, stop, status, list } = require('./commands')
 const { getCLIVersion } = require('./helpers/get-cli-version')
 const apiLogin = require('./middleware/apiLogin')
 
@@ -16,30 +16,24 @@ const init = async () => {
   yargs
     .scriptName('timeular')
     .usage('Usage: $0 <command> [options]')
-    .command({
-      command: 'track [activityName]',
-      aliases: [],
-      desc: 'Start tracking for a specific activity, stops current tracking before starting a new one',
-      builder: yargs => {
-        yargs
-          .positional('activityName', {
-            type: 'string',
-            default: '',
-            describe: 'the name of the activity to track'
-          })
-          .option('m', {
-            alias: 'message',
-            describe: 'the message to add to the activity',
-            type: 'string',
-            nargs: 1,
-            demand: false
-          })
-      },
-      handler: async argv => { await startActivity(argv.activityName, argv.message) }
-    })
-    .command('stop', 'Stops tracking current activity', () => {}, stopActivity, [apiLogin])
+    .command('start [activityName]', 'Start tracking for a specific activity, stops current tracking before starting a new one', yargs => {
+      yargs
+        .positional('activityName', {
+          type: 'string',
+          default: '',
+          describe: 'the name of the activity to track'
+        })
+        .option('m', {
+          alias: 'message',
+          describe: 'the message to add to the activity',
+          type: 'string',
+          nargs: 1,
+          demand: false
+        })
+    }, start, [apiLogin])
+    .command('stop', 'Stops tracking current activity', () => {}, stop, [apiLogin])
     .command('status', 'Shows the current activity tracking status', () => {}, status, [apiLogin])
-    .command('list', 'Lists all activities that are available for tracking', () => {}, listActivities, [apiLogin])
+    .command('list', 'Lists all activities that are available for tracking', () => {}, list, [apiLogin])
     .help('help', 'output usage information')
     .alias(['h'], 'help')
     .version('version', 'output the version number', getCLIVersion())

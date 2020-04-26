@@ -11,7 +11,7 @@ global.Date = class extends Date {
   }
 }
 
-describe('status()', () => {
+describe('status command', () => {
   const argv = {
     apiToken: 'token12345'
   }

@@ -1,10 +1,10 @@
 const chalk = require('chalk')
-const { listActivities } = require('../../commands')
+const { list } = require('../../commands')
 const apiHelpers = require('../../helpers/timeular-api-helpers')
 
 jest.mock('../../helpers/timeular-api-helpers')
 
-describe('listActivities()', () => {
+describe('list command', () => {
   let consoleSpy
 
   beforeEach(() => {
@@ -98,7 +98,7 @@ describe('listActivities()', () => {
   it('fetches activities', async () => {
     apiHelpers.getActivities.mockImplementationOnce(() => Promise.resolve([]))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(apiHelpers.getActivities).toHaveBeenCalledTimes(1)
   })
@@ -106,7 +106,7 @@ describe('listActivities()', () => {
   it('uses provided token to fetch activities', async () => {
     apiHelpers.getActivities.mockImplementationOnce(() => Promise.resolve([]))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(apiHelpers.getActivities).toHaveBeenCalledWith(argv.apiToken)
   })
@@ -114,7 +114,7 @@ describe('listActivities()', () => {
   it('checks current activity tracking', async () => {
     apiHelpers.getCurrentTracking.mockImplementationOnce(() => Promise.resolve({}))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(apiHelpers.getCurrentTracking).toHaveBeenCalledTimes(1)
   })
@@ -122,7 +122,7 @@ describe('listActivities()', () => {
   it('uses provided token to check current tracking', async () => {
     apiHelpers.getCurrentTracking.mockImplementationOnce(() => Promise.resolve({}))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(apiHelpers.getCurrentTracking).toHaveBeenCalledWith(argv.apiToken)
   })
@@ -131,7 +131,7 @@ describe('listActivities()', () => {
     apiHelpers.getActivities.mockImplementationOnce(() => Promise.resolve(activities))
     apiHelpers.getCurrentTracking.mockImplementationOnce(() => Promise.resolve({}))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(console.log).toHaveBeenCalledTimes(5)
     expect(console.log).toHaveBeenNthCalledWith(1, '0\teating')
@@ -145,7 +145,7 @@ describe('listActivities()', () => {
     apiHelpers.getActivities.mockImplementationOnce(() => Promise.resolve(activities))
     apiHelpers.getCurrentTracking.mockImplementationOnce(() => Promise.resolve(currentTracking))
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(console.log).toHaveBeenCalledWith(`0\t${chalk.bold('eating \uF017')}`)
   })
@@ -153,7 +153,7 @@ describe('listActivities()', () => {
   it('writes an error if getting activities fails', async () => {
     apiHelpers.getActivities.mockRejectedValue({ response: { data: { message: 'something went wrong' } } })
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(console.log).toHaveBeenCalledTimes(1)
     expect(console.log).toHaveBeenLastCalledWith({ message: 'something went wrong' })
@@ -162,7 +162,7 @@ describe('listActivities()', () => {
   it('writes an error if current tracking check fails', async () => {
     apiHelpers.getCurrentTracking.mockRejectedValue({ response: { data: { message: 'something went wrong' } } })
 
-    await listActivities(argv)
+    await list(argv)
 
     expect(console.log).toHaveBeenCalledTimes(1)
     expect(console.log).toHaveBeenLastCalledWith({ message: 'something went wrong' })

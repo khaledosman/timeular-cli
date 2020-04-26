@@ -50,7 +50,7 @@ describe('Application Tests', () => {
     })
 
     it('returns command info to stdout', async () => {
-      const expectedCommands = ['timeular track [activityName]', 'timeular stop']
+      const expectedCommands = ['timeular start [activityName]', 'timeular stop', 'timeular list', 'timeular status']
       const { stdout: result } = await cli(['help'], '.')
       expect(result).toContain('Commands:')
       const commands = result.replace(/\n/g, ' ').replace(/^.*Commands:/, '').split(/\s(\s)+/)

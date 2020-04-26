@@ -56,7 +56,7 @@ $ timeular --help
 Usage: timeular <command> [options]
 
 Commands:
-  timeular track [activityName]  Start tracking for a specific activity, stops current tracking
+  timeular start [activityName]  Start tracking for a specific activity, stops current tracking
                                  before starting a new one
   timeular stop                  Stops tracking current activity
   timeular status                Shows the current activity tracking status
@@ -64,7 +64,7 @@ Commands:
 
 Options:
   -h, --help     output usage information                                                  [boolean]
-  -v, --version  output the version number
+  -v, --version  output the version number                                                 [boolean]
 ```
 
 ### Tracking Activity
@@ -73,26 +73,31 @@ Activities can be tracked in multiple ways:
 
 #### Interactive Tracking
 
-If you do not provide any options to the `track` command, you will be prompted to select the activity to track:
+If you do not provide any options to the `start` command, you will be prompted to select the activity to track:
 
 ```
-$ timeular track
-? Please select an activity (Use arrow keys or type to search)
-❯ DEV
-  ARC
-  Administration
-  Education
+$ timeular start
+0	Administration
+1	ARC
+2	DEV
+3	Education
+✔ Number of activity to track: · 0
+✔ Note: · Prepare release
+Stopped tracking: DEV - Working on Timeular CLI (1h 28m 11s)
+Started tracking: Administration - Prepare release
 ```
 
 The list includes all activities you configured in Timeular.
 
 #### Tracking of a specified Activity
 
-You can directly specify the activity in order to start tracking immediately:
+You can directly specify the activity in order to start tracking without selecting from the list:
 
 ```shell script
 $ timeular track <activity>
 ```
+
+Nevertheless, you will be prompted for a note.
 
 #### Tracking of a specified Activity with a Note
 
