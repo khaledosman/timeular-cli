@@ -47,7 +47,6 @@ const init = async () => {
     .command('list', 'Lists all activities that are available for tracking', () => {}, listActivities, [apiLogin])
     .help('help', 'output usage information')
     .alias(['h'], 'help')
-    .showHelpOnFail(true)
     .version('version', 'output the version number', getCLIVersion())
     .alias(['v'], 'version')
     .recommendCommands()
@@ -55,11 +54,17 @@ const init = async () => {
     .strict(true)
     .demandCommand(1, '')
     .middleware(apiLogin)
-    .fail((msg, err) => {
-      console.log(msg || err.message)
-      process.exit(1)
-    })
+    .fail(_errorHandler)
     .argv
+}
+
+const _errorHandler = (msg, err, yargs) => {
+  if (!err && !msg) {
+    yargs.showHelp()
+  } else {
+    console.log(msg || (err && err.message) || err)
+  }
+  process.exit(1)
 }
 
 init()

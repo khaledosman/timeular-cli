@@ -192,6 +192,25 @@ describe('trackingParser()', () => {
     expect(result).toBe(expectedResult)
   })
 
+  it('skips undefined note', () => {
+    const tracking = {
+      activity: {
+        id: '123',
+        name: 'sleeping',
+        color: '#a1b2c3',
+        integration: 'zei'
+      },
+      startedAt: '2019-05-14T10:00:00.000',
+      note: undefined
+    }
+
+    const expectedResult = 'sleeping (1h 1m 58s)'
+
+    const result = trackingParser(tracking)
+
+    expect(result).toBe(expectedResult)
+  })
+
   it('skips zero hours in duration', () => {
     const tracking = {
       activity: {
@@ -255,6 +274,29 @@ describe('trackingParser()', () => {
     }
 
     const expectedDuration = '(1h 0m 58s)'
+
+    const result = trackingParser(tracking)
+
+    expect(result).toInclude(expectedDuration)
+  })
+
+  it('omits zero seconds in duration', () => {
+    const tracking = {
+      activity: {
+        id: '123',
+        name: 'sleeping',
+        color: '#a1b2c3',
+        integration: 'zei'
+      },
+      startedAt: '2019-05-14T10:01:58.000',
+      note: {
+        text: '',
+        tags: [],
+        mentions: []
+      }
+    }
+
+    const expectedDuration = '(1h 0m)'
 
     const result = trackingParser(tracking)
 

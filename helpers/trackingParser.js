@@ -1,10 +1,10 @@
 const parse = tracking => {
   const { activity, note = {}, startedAt } = tracking
-  const { hours, minutes, seconds } = _duration(startedAt + 'Z', new Date().toUTCString())
+  const duration = _duration(startedAt + 'Z', new Date().toUTCString())
 
   let output = activity.name
   output += note && note.text ? ' - ' + note.text : ''
-  output += ' (' + hours + minutes + seconds + ')'
+  output += ' (' + duration.join(' ') + ')'
 
   return output
 }
@@ -18,11 +18,11 @@ const _duration = (startedAt, now) => {
   distance -= minutes * 60000
   const seconds = Math.floor(distance / 1000)
 
-  return {
-    hours: hours > 0 ? `${hours}h ` : '',
-    minutes: minutes > 0 || hours > 0 ? `${minutes}m ` : '',
-    seconds: seconds > 0 ? `${seconds}s` : ''
-  }
+  return [
+    hours > 0 ? `${hours}h` : '',
+    minutes > 0 || hours > 0 ? `${minutes}m` : '',
+    seconds > 0 ? `${seconds}s` : ''
+  ].filter(e => e !== '')
 }
 
 module.exports = parse
