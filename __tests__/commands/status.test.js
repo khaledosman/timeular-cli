@@ -107,6 +107,15 @@ describe('status()', () => {
     await status(argv)
 
     expect(console.log).toHaveBeenCalledTimes(1)
-    expect(console.log).toHaveBeenLastCalledWith({ message: 'something went wrong' })
+    expect(console.log).toHaveBeenLastCalledWith('something went wrong')
+  })
+
+  it('writes an error if current tracking check throws an error', async () => {
+    apiHelpers.getCurrentTracking.mockRejectedValue(new Error('something went wrong'))
+
+    await status(argv)
+
+    expect(console.log).toHaveBeenCalledTimes(1)
+    expect(console.log).toHaveBeenLastCalledWith(new Error('something went wrong'))
   })
 })

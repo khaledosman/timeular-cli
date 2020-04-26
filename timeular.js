@@ -37,12 +37,7 @@ const init = async () => {
       },
       handler: async argv => { await startActivity(argv.activityName, argv.message) }
     })
-    .command({
-      command: 'stop',
-      aliases: [],
-      desc: 'Stops tracking current activity',
-      handler: async argv => { await stopActivity() }
-    })
+    .command('stop', 'Stops tracking current activity', () => {}, stopActivity, [apiLogin])
     .command('status', 'Shows the current activity tracking status', () => {}, status, [apiLogin])
     .command('list', 'Lists all activities that are available for tracking', () => {}, listActivities, [apiLogin])
     .help('help', 'output usage information')

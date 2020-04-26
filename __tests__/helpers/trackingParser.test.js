@@ -302,4 +302,47 @@ describe('trackingParser()', () => {
 
     expect(result).toInclude(expectedDuration)
   })
+
+  it('parses also time entries', () => {
+    const timeEntry = {
+      id: '987',
+      activity: {
+        id: '123',
+        name: 'sleeping',
+        color: '#a1b2c3',
+        integration: 'zei'
+      },
+      duration: {
+        startedAt: '2017-01-02T03:04:05.678',
+        stoppedAt: '2017-02-03T04:05:06.789'
+      },
+      note: {
+        text: 'development Working with John on the new project',
+        tags: [
+          {
+            indices: [
+              0,
+              11
+            ],
+            key: 'development'
+          }
+        ],
+        mentions: [
+          {
+            indices: [
+              25,
+              29
+            ],
+            key: 'John'
+          }
+        ]
+      }
+    }
+
+    const expectedText = 'sleeping - development Working with John on the new project (32d 1h 1m 1s)'
+
+    const result = trackingParser(timeEntry)
+
+    expect(result).toEqual(expectedText)
+  })
 })

@@ -108,7 +108,7 @@ The note may contain tags (`#tag`) and mentions (`@mention`).
 
 Use the `status` command to check your current tracking status:
 
-```shell script
+```
 $ timeular status
 Currently tracking: DEV - Working on Timeular CLI (1h 16m 2s)
 ```
@@ -120,8 +120,9 @@ The current duration is displayed as well.
 
 To finish an activity, use the `stop` command:
 
-```shell script
+```
 $ timeular stop
+Stopped tracking: DEV (4h 24m 51s)
 ```
 
 ### List Activities

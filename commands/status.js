@@ -14,7 +14,7 @@ const status = async argv => {
     console.log(output)
   } catch (err) {
     spinner.end()
-    console.log((err.response && err.response.data) || err)
+    console.log((err.response && err.response.data && err.response.data.message) || err)
   }
 }
 
