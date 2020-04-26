@@ -6,11 +6,12 @@ const yargs = require('yargs')
 const inquirer = require('inquirer')
 const { startActivity, stopActivity, status, listActivities } = require('./commands')
 const { getCLIVersion } = require('./helpers/get-cli-version')
+const apiLogin = require('./middleware/apiLogin')
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 inquirer.registerPrompt('datepicker', require('inquirer-datepicker'))
 
-const initCli = async () => {
+const init = async () => {
   // eslint-disable-next-line no-unused-expressions
   yargs
     .scriptName('timeular')
@@ -42,18 +43,8 @@ const initCli = async () => {
       desc: 'Stops tracking current activity',
       handler: async argv => { await stopActivity() }
     })
-    .command({
-      command: 'status',
-      aliases: [],
-      desc: 'Shows the current activity tracking status',
-      handler: async argv => { await status() }
-    })
-    .command({
-      command: 'list',
-      aliases: [],
-      desc: 'Lists all activities that are available for tracking',
-      handler: async argv => { await listActivities() }
-    })
+    .command('status', 'Shows the current activity tracking status', () => {}, status, [apiLogin])
+    .command('list', 'Lists all activities that are available for tracking', () => {}, listActivities, [apiLogin])
     .help('help', 'output usage information')
     .alias(['h'], 'help')
     .showHelpOnFail(true)
@@ -63,7 +54,12 @@ const initCli = async () => {
     .wrap(100)
     .strict(true)
     .demandCommand(1, '')
+    .middleware(apiLogin)
+    .fail((msg, err) => {
+      console.log(msg || err.message)
+      process.exit(1)
+    })
     .argv
 }
 
-initCli()
+init()
