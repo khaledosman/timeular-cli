@@ -41,26 +41,28 @@ describe('Timeular API Helpers', () => {
       await expect(apiHelpers.signIn()).resolves.toEqual(token)
     })
 
-    it('returns undefined for 400 Bad Request', async () => {
+    it('rejects with response for 400 Bad Request', async () => {
       const response = {
         status: 400,
         statusText: 'Bad Request',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.signIn()).resolves.toBeUndefined()
+      await expect(apiHelpers.signIn()).rejects.toHaveProperty('response', response)
     })
 
-    it('returns undefined for 401 Unauthorized', async () => {
+    it('rejects with response for 401 Unauthorized', async () => {
       const response = {
         status: 401,
         statusText: 'Unauthorized',
         data: { message: 'Explanation of what has happened' }
       }
-      axios.post.mockImplementationOnce(() => Promise.resolve(response))
+      // eslint-disable-next-line prefer-promise-reject-errors
+      axios.post.mockImplementationOnce(() => Promise.reject({ response }))
 
-      await expect(apiHelpers.signIn()).resolves.toBeUndefined()
+      await expect(apiHelpers.signIn()).rejects.toHaveProperty('response', response)
     })
   })
 
