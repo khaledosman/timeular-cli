@@ -51,7 +51,7 @@ export TIMEULAR_API_SECRET="YYYYYYYYYY"
 
 ## Usage
 
-```shell script
+```
 $ timeular --help
 Usage: timeular <command> [options]
 
@@ -74,7 +74,7 @@ Activities can be tracked in multiple ways:
 
 If you do not provide any options to the `track` command, you will be prompted to select the activity to track:
 
-```shell script
+```
 $ timeular track
 ? Please select an activity (Use arrow keys or type to search)
 ❯ DEV
@@ -121,4 +121,19 @@ To finish an activity, use the `stop` command:
 
 ```shell script
 $ timeular stop
+```
+
+### List Activities
+
+You can use the `list` command to print all activities that are available for tracking.
+The output is indexed and sorted alphabetically.
+
+If the tracker is running, the currently tracked is highlighted.
+
+```
+$ timeular list
+0	Administration
+1	ARC
+2	DEV  
+3	Education
 ```

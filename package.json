@@ -58,6 +58,7 @@
     "inquirer": "^7.0.4",
     "inquirer-autocomplete-prompt": "^1.0.2",
     "inquirer-datepicker": "^1.1.0",
+    "lodash": "^4.17.15",
     "yargs": "^15.3.1"
   },
   "config": {

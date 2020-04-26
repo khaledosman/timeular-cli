@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const yargs = require('yargs')
 const inquirer = require('inquirer')
-const { startActivity, stopActivity, status } = require('./commands')
+const { startActivity, stopActivity, status, listActivities } = require('./commands')
 const { getCLIVersion } = require('./helpers/get-cli-version')
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
@@ -47,6 +47,12 @@ const initCli = async () => {
       aliases: [],
       desc: 'Shows the current activity tracking status',
       handler: async argv => { await status() }
+    })
+    .command({
+      command: 'list',
+      aliases: [],
+      desc: 'Lists all activities that are available for tracking',
+      handler: async argv => { await listActivities() }
     })
     .help('help', 'output usage information')
     .alias(['h'], 'help')
