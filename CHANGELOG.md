@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/khaledosman/timeular-cli/compare/v1.1.9...v1.1.10) (2020-10-08)
+
+
+### Bug Fixes
+
+* update lockfile ([95f1ea1](https://github.com/khaledosman/timeular-cli/commit/95f1ea1d92fc82afea560890cf42b63e7032a1a7))
+
 ## [1.1.9](https://github.com/khaledosman/timeular-cli/compare/v1.1.8...v1.1.9) (2020-10-08)
 
 
